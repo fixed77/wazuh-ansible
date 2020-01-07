@@ -136,6 +136,7 @@
 
 - name: Wait for Elasticsearch port
   wait_for: host={{ elasticsearch_network_host }} port={{ elasticsearch_http_port }}
+  ignore_errors: true
 
 - name: Select correct API protocol
   set_fact:
@@ -149,6 +150,7 @@
     password: "{{ elasticsearch_xpack_security_password }}"
     validate_certs: no
     status_code: 200, 404
+  ignore_errors: true
 
 - name: Configure Wazuh Kibana Plugin
   template:
